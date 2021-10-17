@@ -1,15 +1,16 @@
-module.exports = app => {
-    const response = require("../controller/response.controller.js");
-  
-    var router = require("express").Router();
-  
-    // Create a new User
-    router.post("/", response.create);
-    
-    /*
-    // Retrieve all Tutorials
-    router.get("/", response.findAll);
-  
+const userController = require("../controller/user.controller.js");
+const auth = require("../middleware/auth.js")
+
+module.exports = (app) => {
+  var router = require("express").Router();
+
+  // Create a new User
+  router.post("/", userController.create);
+
+  //Get the user
+  router.get("/", userController.login);
+
+  /*
     // Retrieve all published Tutorials
     router.get("/published", tutorials.findAllPublished);
   
@@ -25,7 +26,6 @@ module.exports = app => {
     // Create a new Tutorial
     router.delete("/", tutorials.deleteAll);
     */
-  
-    app.use("/api/", router);
-  };
-  
+
+  app.use("/api/", router);
+};
