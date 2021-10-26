@@ -6,15 +6,18 @@ module.exports = (mongoose) => {
       },
       ID_TipoAvion: {
         require: true,
-        type: Number,
+        type: [{ type: mongoose.Schema.Types.ObjectId, 
+          ref: "tipoAvion" }],
       },
       ID_Ruta: {
         require: true,
-        type: Number,
+        type: [{ type: mongoose.Schema.Types.ObjectId, 
+          ref: "ruta" }],
       },
       ID_Asiento: {
         require: true,
-        type: Number,
+        type: [{ type: mongoose.Schema.Types.ObjectId, 
+          ref: "asiento" }],
       },
     });
     return mongoose.model("vuelo", vueloSchema);

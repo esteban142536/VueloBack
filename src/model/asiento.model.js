@@ -14,7 +14,8 @@ module.exports = (mongoose) => {
       },
       ID_Tiquete: {
         require: true,
-        type: String,
+        type: [{ type: mongoose.Schema.Types.ObjectId, 
+          ref: "tiquete" }],
       },
     });
     return mongoose.model("asiento", asientoSchema);

@@ -6,15 +6,18 @@ module.exports = (mongoose) => {
       },
       ID_Avion: {
         require: true,
-        type: String,
+        type: [{ type: mongoose.Schema.Types.ObjectId, 
+          ref: "vuelo" }],
       },
       ID_Persona: {
         require: true,
-        type: String,
+        type: [{ type: mongoose.Schema.Types.ObjectId, 
+          ref: "user" }],
       },
       ID_Asiento: {
         require: true,
-        type: String,
+        type: [{ type: mongoose.Schema.Types.ObjectId, 
+          ref: "asiento" }],
       },
 
     });
