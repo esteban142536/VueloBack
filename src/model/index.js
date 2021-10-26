@@ -7,7 +7,12 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.user = require("./user.model.js")(mongoose);
-db.tipoUsuario = require("./tipoUser.model.js")(mongoose);
+db.asiento = require("./asiento.model.js")(mongoose);
+db.factura = require("./factura.model.js")(mongoose);
+db.ruta = require("./ruta.model.js")(mongoose);
+db.tipoAvion = require("./tipoAvion.model.js")(mongoose);
+db.tiquete = require("./tiquete.model.js")(mongoose);
+db.vuelo = require("./vuelo.model.js")(mongoose);
 
 module.exports = db;
 

@@ -1,6 +1,6 @@
 const db = require("../model");
 const UserModel = db.user;
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 /**
 Here is the logic of the responses, necessary to make the api work
@@ -49,7 +49,7 @@ module.exports.login = async (req, res) => {
   }
 
   // Search User in the database
-  const user = await UserModel.findOne({ email: email, password:password }).exec();
+  const user = await UserModel.findOne({ email: email }).exec();
 
   //validate data
   if (!user) {
@@ -58,26 +58,25 @@ module.exports.login = async (req, res) => {
       .send({ success: false, msg: "Authentication failed. User not found." });
   } else {
     //Si el usuario existe verifica si las contraseñas
-   // user.comparePassword(password, user.password, function (err, isMatch) {
-     //arreglar problemas en la contraseña, arreglo temporal
-
-      if (password===user.password) {
-        /*
+    user.comparePassword(password, user.password, function (err, isMatch) {
+      if (isMatch && !err) {
         // Si el usuario es correcto y la contraseña coindice se procede a crear el token
-        const token = jwt.sign({ email: email }, config.SECRETWORDJWT, {
+        const token = jwt.sign({ email: email }, "dfhgifhdjgbfusdhkgbfdhwsk", {
           expiresIn: "2h",
         });
         // return the information including token as JSON
-        res.json({ success: true, token: "JWT " + token });
-        */
+      //  res.json({ success: true, token: "JWT " + token });
+
         res.send(user);
+        return;
       } else {
         //si la contraseña no coincide se procede a indicar el error
         res.status(400).send({
           success: false,
           msg: "Authentication failed. Wrong password.",
         });
+        return;
       }
-   // };
+    });
   }
 };

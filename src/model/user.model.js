@@ -1,47 +1,75 @@
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require("bcrypt-nodejs");
 
 module.exports = (mongoose) => {
   var userSchema = mongoose.Schema({
-    id: String,
-    type: String,
-    password: String,
-    email: String,
-    ID_tipoUsuario: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "tipoUsuario",
+    nombre: {
+      type: String,
+      required: true,
+    },
+    apellido: {
+      type: String,
+      required: true,
+    },
+    fecNacimient: {
+      type: Date,
+      required: true,
+    },
+    edad: {
+      type: Number,
+      required: true,
+    },
+    direccion: {
+      required: true,
+      type: String,
+    },
+    telefono: {
+      required: true,
+      type: Number,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    tipoUsuario: {
+      type: String,
+      default: "user",
+      enum: ["user", "admin"],
     },
   });
 
-
-  userSchema.pre('save', function (next) {
+  userSchema.pre("save", function (next) {
     var user = this;
-    if (this.isModified('password') || this.isNew) {
-        bcrypt.genSalt(10, function (err, salt) {
-            if (err) {
-                return next(err);
-            }
-            bcrypt.hash(user.password, salt, null, function (err, hash) {
-                if (err) {
-                    return next(err);
-                }
-                user.password = hash;
-                next();
-            });
-        });
-    } else {
-        return next();
-    }
-});
-
-userSchema.methods.comparePassword = async (passw, userPassw, cb) => {
-    bcrypt.compare(passw, userPassw, function (err, isMatch) {
+    if (this.isModified("password") || this.isNew) {
+      bcrypt.genSalt(10, function (err, salt) {
         if (err) {
-            return cb(err);
+          return next(err);
         }
-        cb(null, isMatch);
-    });
-};
+        bcrypt.hash(user.password, salt, null, function (err, hash) {
+          if (err) {
+            return next(err);
+          }
+          user.password = hash;
+          next();
+        });
+      });
+    } else {
+      return next();
+    }
+  });
 
+  userSchema.methods.comparePassword = async (passw, userPassw, cb) => {
+    bcrypt.compare(passw, userPassw, function (err, isMatch) {
+      if (err) {
+        return cb(err);
+      }
+      cb(null, isMatch);
+    });
+  };
 
   return mongoose.model("user", userSchema);
 };

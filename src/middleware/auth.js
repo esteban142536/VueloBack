@@ -12,7 +12,7 @@ const verifyToken = async (req, res, next) => {
     return res.status(403).send("A token is required for authentication");
   }
   try {
-    const { email } = jwt.verify(token, config.SECRETWORDJWT);
+    const { email } = jwt.verify(token, "dfhgifhdjgbfusdhkgbfdhwsk");
     req.user = await userModel.findOne({ email }).exec();
   } catch (err) {
     return res.status(401).send("Invalid Token");
