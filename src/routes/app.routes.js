@@ -1,5 +1,6 @@
 const userController = require("../controller/user.controller.js");
 const tipoAvionController= require("../controller/tipoAvion.controller.js")
+const rutaController=require("../controller/ruta.controller.js")
 const auth = require("../middleware/auth.js")
 
 module.exports = (app) => {
@@ -13,6 +14,12 @@ module.exports = (app) => {
 
   //create tipo avion
   router.post("/tipoAvion", tipoAvionController.create);
+
+  //crear la ruta
+  router.post("/ruta", rutaController.create);
+
+    //buscar una ruta por ID
+    router.get("/ruta", rutaController.getRutaID);
 
   /*
     // Retrieve all published Tutorials
