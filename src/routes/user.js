@@ -1,5 +1,5 @@
 // Filename : user.js
-
+/*
 import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -7,12 +7,6 @@ import jwt from "jsonwebtoken";
 const router = express.Router();
 
 import User from "../model/user.model.js";
-
-/**
- * @method - POST
- * @param - /signup
- * @description - User SignUp
- */
 
 export default router.post(
     "/login",
@@ -68,3 +62,4 @@ export default router.post(
     }
   );
 
+*/

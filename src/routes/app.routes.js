@@ -1,4 +1,5 @@
 const userController = require("../controller/user.controller.js");
+const tipoAvionController= require("../controller/tipoAvion.controller.js")
 const auth = require("../middleware/auth.js")
 
 module.exports = (app) => {
@@ -9,6 +10,9 @@ module.exports = (app) => {
 
   //Get the user
   router.get("/", userController.login);
+
+  //create tipo avion
+  router.post("/tipoAvion", tipoAvionController.create);
 
   /*
     // Retrieve all published Tutorials
