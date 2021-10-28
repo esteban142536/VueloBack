@@ -1,7 +1,8 @@
 const userController = require("../controller/user.controller.js");
-const tipoAvionController= require("../controller/tipoAvion.controller.js")
-const rutaController=require("../controller/ruta.controller.js")
-const auth = require("../middleware/auth.js")
+const tipoAvionController = require("../controller/tipoAvion.controller.js");
+const rutaController = require("../controller/ruta.controller.js");
+const asientoController = require("../controller/asiento.controller.js");
+const auth = require("../middleware/auth.js");
 
 module.exports = (app) => {
   var router = require("express").Router();
@@ -18,8 +19,14 @@ module.exports = (app) => {
   //crear la ruta
   router.post("/ruta", rutaController.create);
 
-    //buscar una ruta por ID
-    router.get("/ruta", rutaController.getRutaID);
+  //buscar una ruta por ID
+  router.get("/ruta", rutaController.getRutaID);
+
+  //crear el asiento
+  router.post("/asiento", asientoController.create);
+
+  //buscar un asiento por ID
+  router.get("/asiento", asientoController.getAsientoID);
 
   /*
     // Retrieve all published Tutorials
