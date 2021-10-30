@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
+const dotEnv = require("dotenv");
+dotEnv.config();
 const userModel = require("../model/user.model");
-//Se obtiene las variables de entorno
-const config = process.env;
 
 //Se verifica que el token sea valido
 const verifyToken = async (req, res, next) => {
@@ -12,7 +12,7 @@ const verifyToken = async (req, res, next) => {
     return res.status(403).send("A token is required for authentication");
   }
   try {
-    const { email } = jwt.verify(token, "dfhgifhdjgbfusdhkgbfdhwsk");
+    const { email } = jwt.verify(token, process.env.SECRETOKEN);
     req.user = await userModel.findOne({ email }).exec();
   } catch (err) {
     return res.status(401).send("Invalid Token");

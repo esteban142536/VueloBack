@@ -1,7 +1,7 @@
 const userController = require("../controller/user.controller.js");
 const tipoAvionController = require("../controller/tipoAvion.controller.js");
 const rutaController = require("../controller/ruta.controller.js");
-const asientoController = require("../controller/asiento.controller.js");
+const vueloController = require("../controller/vuelo.controller.js");
 const auth = require("../middleware/auth.js");
 
 module.exports = (app) => {
@@ -22,13 +22,12 @@ module.exports = (app) => {
   //buscar una ruta por ID
   router.get("/ruta", rutaController.getRutaID);
 
-  //crear el asiento
-  router.post("/asiento", asientoController.create);
-
-  //buscar un asiento por ID
-  router.get("/asiento", asientoController.getAsientoID);
+  //Crear vuelo
+  router.get("/vuelo", vueloController.create);
 
   /*
+Ejemplos de otras acciones
+
     // Retrieve all published Tutorials
     router.get("/published", tutorials.findAllPublished);
   
