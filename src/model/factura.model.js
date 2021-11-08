@@ -2,8 +2,7 @@ module.exports = (mongoose) => {
   var facturaSchema = mongoose.Schema({
     ID_Usuario: {
       require: true,
-      type: [{ type: String, 
-        ref: "user" }],
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
     },
     fecha: {
       type: Date,
