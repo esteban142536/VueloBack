@@ -30,3 +30,24 @@ module.exports.getRutaID = async (req, res) => {
   }
   res.status(400).send({ msg: "La ruta esta vacia o no existe" });
 };
+
+module.exports.get = async (req, res, next) => {
+  const ruta = await rutaModel.find().exec();
+  res.json(ruta);
+};
+
+module.exports.delete = async (req, res, next) => {
+  const ruta = await rutaModel.findByIdAndRemove(req.params.id);
+  // si post es null significa que no existe el registro
+  if (ruta) {
+    res.json({
+      result: `ruta borrado correctamente`,
+      ruta: ruta,
+    });
+  } else {
+    res.json({
+      result: "Id de ruta Invalido Invalid",
+      ruta: ruta,
+    });
+  }
+};

@@ -1,6 +1,8 @@
 const db = require("../model");
 const UserModel = db.user;
 const jwt = require("jsonwebtoken");
+const dotEnv = require("dotenv");
+dotEnv.config();
 
 /**
 Here is the logic of the responses, necessary to make the api work
@@ -19,8 +21,13 @@ module.exports.create = (req, res) => {
   const user = new UserModel({
     email: req.body.email,
     password: req.body.password,
-    name: req.body.name,
-    type: "user",
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    tipoUsuario: req.body.tipoUsuario,
+    fecNacimient: req.body.fecNacimient,
+    edad: req.body.edad,
+    direccion: req.body.direccion,
+    telefono: req.body.telefono,
   });
 
   // Save User in the database
@@ -61,11 +68,11 @@ module.exports.login = async (req, res) => {
     user.comparePassword(password, user.password, function (err, isMatch) {
       if (isMatch && !err) {
         // Si el usuario es correcto y la contraseña coindice se procede a crear el token
-        const token = jwt.sign({ email: email }, "dfhgifhdjgbfusdhkgbfdhwsk", {
+        const token = jwt.sign({ email: email }, process.env.SECRETOKEN, {
           expiresIn: "2h",
         });
         // return the information including token as JSON
-      //  res.json({ success: true, token: "JWT " + token });
+        //  res.json({ success: true, token: "JWT " + token });
 
         res.send(user);
         return;

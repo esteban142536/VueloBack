@@ -10,7 +10,7 @@ module.exports = (mongoose) => {
     },
     ID_Tiquete: {
       require: true,
-      type: String,
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "tiquete" }],
     },
     IVA: {
       require: true,

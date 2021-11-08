@@ -13,3 +13,30 @@ module.exports.create = (req, res) => {
       });
     });
 };
+
+module.exports.get = async (req, res, next) => {
+  const tipoAvion = await tipoAvionModel.find().exec();
+  res.json(tipoAvion);
+};
+
+module.exports.getById = async (req, res, next) => {
+  const id = req.params.id;
+  const tipoAvion = await tipoAvionModel.findOne({ _id: id }).exec();
+  res.json(tipoAvion);
+};
+
+module.exports.delete = async (req, res, next) => {
+  const tipoAvion = await tipoAvionModel.findByIdAndRemove(req.params.id);
+  // si post es null significa que no existe el registro
+  if (tipoAvion) {
+    res.json({
+      result: `tipoAvion borrado correctamente`,
+      tipoAvion: tipoAvion,
+    });
+  } else {
+    res.json({
+      result: "Id de tipoAvion Invalido Invalid",
+      tipoAvion: tipoAvion,
+    });
+  }
+};
