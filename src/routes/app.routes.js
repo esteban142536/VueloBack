@@ -20,7 +20,7 @@ module.exports = (app) => {
   router.post("/ruta", rutaController.create);
 
   //buscar una ruta por ID
-  router.get("/ruta", rutaController.getRutaID);
+  router.get("/ruta/:id", rutaController.getRutaID);
 
   //Crear vuelo
   router.get("/vuelo", vueloController.create);
