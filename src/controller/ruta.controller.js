@@ -51,3 +51,18 @@ module.exports.delete = async (req, res, next) => {
     });
   }
 };
+
+module.exports.update = async (req, res, next) => {
+  const { _id, origen, destino, duracion, precio } = req.body;
+  const ruta = await rutaModel.findOneAndUpdate(
+    { _id: _id },
+    {
+      origen: origen,
+      destino: destino,
+      duracion: duracion,
+      precio: precio,
+    },
+    { new: true } // retornar el registro que hemos modificado con los nuevos valores
+  );
+  res.json(ruta);
+};

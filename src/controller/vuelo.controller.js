@@ -2,10 +2,11 @@ const db = require("../model");
 const vueloModel = db.vuelo;
 
 module.exports.create = (req, res) => {
-  const tipoAvion = new vueloModel(req.body);
+  const vuelo = new vueloModel(req.body);
+  console.log("🚀 ~ file: vuelo.controller.js ~ line 6 ~ vuelo", vuelo)
 
-  tipoAvion
-    .save(tipoAvion)
+  vuelo
+    .save(vuelo)
     .then((data) => res.send(data))
     .catch((err) => {
       res.status(500).send({
@@ -34,14 +35,19 @@ module.exports.delete = async (req, res, next) => {
     res.json({ result: "Id de Vuelo Invalido Invalid", vuelo: vuelo });
   }
 };
-/*
+
 module.exports.update = async (req, res, next) => {
-  const { title, body } = req.body;
-  const post = await vueloModel.findOneAndUpdate(
-    { _id: req.params.id },
-    { title, body }, // ==> {title: title, body: body}
+  const { _id, numeroVuelo, marca, fechaIda, ID_TipoAvion, ID_Ruta } = req.body;
+  const vuelo = await vueloModel.findOneAndUpdate(
+    { _id: _id },
+    {
+      numeroVuelo: numeroVuelo,
+      marca: marca,
+      fechaIda: fechaIda,
+      ID_TipoAvion: ID_TipoAvion,
+      ID_Ruta: ID_Ruta,
+    }, // ==> {title: title, body: body}
     { new: true } // retornar el registro que hemos modificado con los nuevos valores
   );
-  res.json(post);
+  res.json(vuelo);
 };
-*/
