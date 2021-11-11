@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./model/index.js");
 const dotEnv = require("dotenv");
+require('pretty-error').start();
 
 const app = express();
 dotEnv.config();
