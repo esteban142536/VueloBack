@@ -1,5 +1,9 @@
 module.exports = (mongoose) => {
   var vueloSchema = mongoose.Schema({
+    _id: {
+      require: true,
+      type: mongoose.Schema.Types.ObjectId,
+    },
     numeroVuelo: {
       type: String,
       required: true,
