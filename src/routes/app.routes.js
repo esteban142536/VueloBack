@@ -2,28 +2,52 @@ const userController = require("../controller/user.controller.js");
 const tipoAvionController = require("../controller/tipoAvion.controller.js");
 const rutaController = require("../controller/ruta.controller.js");
 const vueloController = require("../controller/vuelo.controller.js");
+const facturaController = require("../controller/factura.model.js");
+const tiqueteController = require("../controller/tiquete.model.js");
+
 const auth = require("../middleware/auth.js");
 
 module.exports = (app) => {
   var router = require("express").Router();
 
-  // Create a new User
+  // user
   router.post("/", userController.create);
-
-  //Get the user
   router.get("/", userController.login);
 
-  //create tipo avion
+  //tipo avion
   router.post("/tipoAvion", tipoAvionController.create);
+  router.get("/tipoAvion/:id", tipoAvionController.getById);
+  router.get("/tipoAvion", tipoAvionController.get);
+  router.put("/tipoAvion/:id", tipoAvionController.update);
+  router.delete("/tipoAvion/:id", tipoAvionController.delete);
 
-  //crear la ruta
+  //ruta
   router.post("/ruta", rutaController.create);
-
-  //buscar una ruta por ID
   router.get("/ruta/:id", rutaController.getRutaID);
+  router.get("/ruta", rutaController.get);
+  router.delete("/ruta/:id", rutaController.delete);
+  router.put("/ruta/:id", rutaController.update);
 
-  //Crear vuelo
-  router.get("/vuelo", vueloController.create);
+  //vuelo
+  router.post("/vuelo", vueloController.create);
+  router.get("/vuelo", vueloController.get);
+  router.get("/vuelo/:id", vueloController.getById);
+  router.put("/vuelo/:id", vueloController.update);
+  router.delete("/vuelo/:id", vueloController.delete);
+
+  //facturas
+
+  router.post("/factura", facturaController.create);
+  router.get("/factura", facturaController.get);
+  router.get("/factura/:id", facturaController.getById);
+  router.delete("/factura/:id", facturaController.delete);
+
+  //tiquete
+
+  router.post("/tiquete", tiqueteController.create);
+  router.get("/tiquete", tiqueteController.get);
+  router.get("/tiquete/:id", tiqueteController.getById);
+  router.delete("/tiquete/:id", tiqueteController.delete);
 
   /*
 Ejemplos de otras acciones

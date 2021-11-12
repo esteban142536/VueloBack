@@ -2,6 +2,10 @@ const bcrypt = require("bcrypt-nodejs");
 
 module.exports = (mongoose) => {
   var userSchema = mongoose.Schema({
+    _id: {
+      require: true,
+      type: mongoose.Schema.Types.ObjectId,
+    },
     nombre: {
       type: String,
       required: true,

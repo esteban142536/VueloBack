@@ -40,3 +40,17 @@ module.exports.delete = async (req, res, next) => {
     });
   }
 };
+
+module.exports.update = async (req, res, next) => {
+  const { _id, nombre, cantidadFila, cantidadAsientos } = req.body;
+  const tipoAvion = await tipoAvionModel.findOneAndUpdate(
+    { _id: _id },
+    {
+      nombre: nombre,
+      cantidadFila: cantidadFila,
+      cantidadAsientos: cantidadAsientos,
+    },
+    { new: true } // retornar el registro que hemos modificado con los nuevos valores
+  );
+  res.json(tipoAvion);
+};

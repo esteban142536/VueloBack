@@ -1,5 +1,9 @@
 module.exports = (mongoose) => {
   var rutaSchema = mongoose.Schema({
+    _id: {
+      require: true,
+      type: mongoose.Schema.Types.ObjectId,
+    },
     origen: {
       require: true,
       type: String,

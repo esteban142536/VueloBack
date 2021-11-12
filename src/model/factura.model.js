@@ -1,5 +1,9 @@
 module.exports = (mongoose) => {
   var facturaSchema = mongoose.Schema({
+    _id: {
+      require: true,
+      type: mongoose.Schema.Types.ObjectId,
+    },
     ID_Usuario: {
       require: true,
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
