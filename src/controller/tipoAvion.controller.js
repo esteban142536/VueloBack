@@ -3,6 +3,10 @@ const tipoAvionModel = db.tipoAvion;
 
 module.exports.create = (req, res) => {
   const tipoAvion = new tipoAvionModel(req.body);
+  console.log(
+    "🚀 ~ file: tipoAvion.controller.js ~ line 6 ~ req.body",
+    req.body
+  );
 
   tipoAvion
     .save(tipoAvion)
@@ -50,7 +54,7 @@ module.exports.update = async (req, res, next) => {
       cantidadFila: cantidadFila,
       cantidadAsientos: cantidadAsientos,
     },
-    { new: true } // retornar el registro que hemos modificado con los nuevos valores
+    { new: true }
   );
   res.json(tipoAvion);
 };
