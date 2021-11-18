@@ -3,6 +3,7 @@ const tiqueteModel = db.tiquete;
 
 module.exports.create = (req, res) => {
   const tiquete = new tiqueteModel(req.body);
+  console.log("🚀 ~ file: tiquete.model.js ~ line 6 ~ tiquete", req.body);
 
   tiquete
     .save(tiquete)
@@ -33,4 +34,18 @@ module.exports.delete = async (req, res, next) => {
   } else {
     res.json({ result: "Id de tiquete Invalido Invalid", tiquete: tiquete });
   }
+};
+
+module.exports.update = async (req, res, next) => {
+  const { _id, ID_Vuelo, codigo_Fila, codigo_Columna } = req.body;
+  const tiquete = await tiqueteModel.findOneAndUpdate(
+    { _id: _id },
+    {
+      ID_Vuelo: ID_Vuelo,
+      codigo_Fila: codigo_Fila,
+      codigo_Columna: codigo_Columna,
+    },
+    { new: true } // retornar el registro que hemos modificado con los nuevos valores
+  );
+  res.json(tiquete);
 };

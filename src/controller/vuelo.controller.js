@@ -3,7 +3,6 @@ const vueloModel = db.vuelo;
 
 module.exports.create = (req, res) => {
   const vuelo = new vueloModel(req.body);
-  console.log("🚀 ~ file: vuelo.controller.js ~ line 6 ~ vuelo", vuelo)
 
   vuelo
     .save(vuelo)

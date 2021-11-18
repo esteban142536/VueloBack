@@ -3,7 +3,7 @@ const tipoAvionController = require("../controller/tipoAvion.controller.js");
 const rutaController = require("../controller/ruta.controller.js");
 const vueloController = require("../controller/vuelo.controller.js");
 const facturaController = require("../controller/factura.model.js");
-const tiqueteController = require("../controller/tiquete.model.js");
+const tiqueteController = require("../controller/tiquete.controller.js");
 
 const auth = require("../middleware/auth.js");
 
@@ -47,6 +47,7 @@ module.exports = (app) => {
   router.post("/tiquete", tiqueteController.create);
   router.get("/tiquete", tiqueteController.get);
   router.get("/tiquete/:id", tiqueteController.getById);
+  router.put("/tiquete/:id", tiqueteController.update);
   router.delete("/tiquete/:id", tiqueteController.delete);
 
   /*
