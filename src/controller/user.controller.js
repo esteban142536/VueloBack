@@ -28,6 +28,7 @@ module.exports.create = (req, res) => {
     edad: req.body.edad,
     direccion: req.body.direccion,
     telefono: req.body.telefono,
+    _id: req.body._id,
   });
 
   // Save User in the database
