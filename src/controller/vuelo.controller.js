@@ -1,7 +1,12 @@
 const db = require("../model");
 const vueloModel = db.vuelo;
 
-module.exports.create = (req, res) => {
+module.exports.create = (req, res, next) => {
+  /*const {numeroVuelo, marca, fechaIda, ID_TipoAvion, ID_Ruta } = req.body;
+  const ticket = new vueloModel({ numeroVuelo: numeroVuelo, marca: marca, fechaIda: fechaIda, ID_TipoAvion: ID_TipoAvion, ID_Ruta: ID_Ruta});
+  ticket.save();
+  res.json(ticket);*/
+
   const vuelo = new vueloModel(req.body);
 
   vuelo
@@ -36,15 +41,15 @@ module.exports.delete = async (req, res, next) => {
 };
 
 module.exports.update = async (req, res, next) => {
-  const { _id, numeroVuelo, marca, fechaIda, ID_TipoAvion, ID_Ruta } = req.body;
+  const {numeroVuelo, marca, fechaIda, ID_TipoAvion, ID_Ruta } = req.body;
   const vuelo = await vueloModel.findOneAndUpdate(
-    { _id: _id },
+    { _id: req.params.id },
     {
-      numeroVuelo: numeroVuelo,
-      marca: marca,
-      fechaIda: fechaIda,
-      ID_TipoAvion: ID_TipoAvion,
-      ID_Ruta: ID_Ruta,
+      numeroVuelo,
+      marca,
+      fechaIda,
+      ID_TipoAvion,
+      ID_Ruta,
     }, // ==> {title: title, body: body}
     { new: true } // retornar el registro que hemos modificado con los nuevos valores
   );

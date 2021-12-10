@@ -1,7 +1,7 @@
 const db = require("../model");
 const tiqueteModel = db.tiquete;
 
-module.exports.create = (req, res) => {
+module.exports.create = (req, res, next) => {
   const tiquete = new tiqueteModel(req.body);
   console.log("🚀 ~ file: tiquete.model.js ~ line 6 ~ tiquete", req.body);
 
@@ -17,7 +17,10 @@ module.exports.create = (req, res) => {
 
 module.exports.get = async (req, res, next) => {
   const tiquete = await tiqueteModel.find().exec();
-  console.log("🚀 ~ file: tiquete.controller.js ~ line 20 ~ module.exports.get= ~ tiquete", tiquete)
+  console.log(
+    "🚀 ~ file: tiquete.controller.js ~ line 20 ~ module.exports.get= ~ tiquete",
+    tiquete
+  );
   res.json(tiquete);
 };
 
@@ -38,13 +41,13 @@ module.exports.delete = async (req, res, next) => {
 };
 
 module.exports.update = async (req, res, next) => {
-  const { _id, ID_Vuelo, codigo_Fila, codigo_Columna } = req.body;
+  const { ID_Vuelo, codigo_Fila, codigo_Columna } = req.body;
   const tiquete = await tiqueteModel.findOneAndUpdate(
-    { _id: _id },
+    { _id: req.params.id },
     {
-      ID_Vuelo: ID_Vuelo,
-      codigo_Fila: codigo_Fila,
-      codigo_Columna: codigo_Columna,
+      ID_Vuelo,
+      codigo_Fila,
+      codigo_Columna,
     },
     { new: true } // retornar el registro que hemos modificado con los nuevos valores
   );

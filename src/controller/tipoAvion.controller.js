@@ -46,13 +46,13 @@ module.exports.delete = async (req, res, next) => {
 };
 
 module.exports.update = async (req, res, next) => {
-  const { _id, nombre, cantidadFila, cantidadAsientos } = req.body;
+  const { nombre, cantidadFila, cantidadAsientos } = req.body;
   const tipoAvion = await tipoAvionModel.findOneAndUpdate(
-    { _id: _id },
+    { _id: req.params.id },
     {
-      nombre: nombre,
-      cantidadFila: cantidadFila,
-      cantidadAsientos: cantidadAsientos,
+      nombre,
+      cantidadFila,
+      cantidadAsientos,
     },
     { new: true }
   );
