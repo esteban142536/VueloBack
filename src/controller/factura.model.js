@@ -34,3 +34,13 @@ module.exports.delete = async (req, res, next) => {
     res.json({ result: "Id de factura Invalido Invalid", factura: factura });
   }
 };
+module.exports.update = async (req, res, next) => {
+  const data = req.body;
+  const id = data._id;
+  const tiquete = await tiqueteModel.findOneAndUpdate(
+    { _id: id },
+    data,
+    { new: true } // retornar el registro que hemos modificado con los nuevos valores
+  );
+  res.json(tiquete);
+};

@@ -17,6 +17,7 @@ module.exports.create = (req, res) => {
 
 module.exports.get = async (req, res, next) => {
   const tiquete = await tiqueteModel.find().exec();
+  console.log("🚀 ~ file: tiquete.controller.js ~ line 20 ~ module.exports.get= ~ tiquete", tiquete)
   res.json(tiquete);
 };
 

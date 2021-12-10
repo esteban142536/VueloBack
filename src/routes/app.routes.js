@@ -11,8 +11,11 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // user
-  router.post("/", userController.create);
-  router.get("/", userController.login);
+  router.post("/user", userController.create);
+  router.get("/user", userController.login);
+  router.get("/user/all", userController.get); //obtener todos los usuarios
+  router.put("/user/:id", userController.update);
+  router.delete("/user/:id", userController.delete);
 
   //tipo avion
   router.post("/tipoAvion", tipoAvionController.create);
@@ -39,6 +42,7 @@ module.exports = (app) => {
 
   router.post("/factura", facturaController.create);
   router.get("/factura", facturaController.get);
+  router.put("/factura/:id", facturaController.update);
   router.get("/factura/:id", facturaController.getById);
   router.delete("/factura/:id", facturaController.delete);
 

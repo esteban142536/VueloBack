@@ -88,3 +88,29 @@ module.exports.login = async (req, res) => {
     });
   }
 };
+
+module.exports.get = async (req, res, next) => {
+  const user = await UserModel.find().exec();
+  res.json(user);
+};
+
+module.exports.delete = async (req, res, next) => {
+  const usuario = await UserModel.findByIdAndRemove(req.params.id);
+  // si post es null significa que no existe el registro
+  if (usuario) {
+    res.json({ result: `usuario borrado correctamente`, usuario: usuario });
+  } else {
+    res.json({ result: "Id de usuario Invalido Invalid", usuario: usuario });
+  }
+};
+
+module.exports.update = async (req, res, next) => {
+  const user = req.body;
+  const userId = user.id;
+  const usuario = await UserModel.findOneAndUpdate(
+    { _id: userId },
+    user,
+    { new: true } // retornar el registro que hemos modificado con los nuevos valores
+  );
+  res.json(usuario);
+};
