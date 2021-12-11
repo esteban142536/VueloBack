@@ -108,9 +108,15 @@ module.exports.update = async (req, res, next) => {
   const user = req.body;
   const userId = user.id;
   const usuario = await UserModel.findOneAndUpdate(
-    { _id: userId },
+    { _id: req.params.id },
     user,
     { new: true } // retornar el registro que hemos modificado con los nuevos valores
   );
   res.json(usuario);
+};
+
+module.exports.getById = async (req, res, next) => {
+  const id = req.params.id;
+  const user = await UserModel.findOne({ _id: id }).exec();
+  res.json(user);
 };

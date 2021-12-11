@@ -14,6 +14,7 @@ module.exports = (app) => {
   router.post("/user", userController.create);
   router.get("/user", userController.login);
   router.get("/user/all", userController.get); //obtener todos los usuarios
+  router.get("/user/:id", userController.getById);
   router.put("/user/:id", userController.update);
   router.delete("/user/:id", userController.delete);
 
